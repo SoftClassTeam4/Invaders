@@ -75,6 +75,7 @@ public class GameScreen extends Screen {
 	private static final int[] DY = new int[] {0, 1, 0, -1, 1, -1, 1, -1};
 
 	private static final int DRILL_SPEED = -5;
+	private static final int INIT_DRILL_COUNT = 1;
 
 	/** Current game difficulty settings. */
 	private GameSettings gameSettings;
@@ -166,6 +167,7 @@ public class GameScreen extends Screen {
 	/** minimum time between bomb launch */
 	/** Drill */
 	private Drill drill = null;
+	private int drillCount;
 	private Cooldown bombCooldown;
 	/** Current Value of Enhancement Attack. */
 	private int attackDamage;
@@ -253,6 +255,7 @@ public class GameScreen extends Screen {
 		this.shipColor = gameState.getShipColor();
 		this.nowSkinString = gameState.getNowSkinString();
 		this.bombCount = INIT_BOMB_COUNT;
+		this.drillCount = INIT_DRILL_COUNT;
 		this.laserActivate = (gameSettings.getDifficulty() == 1 && getGameState().getLevel() >= 4) || (gameSettings.getDifficulty() > 1);
 		if (gameSettings.getDifficulty() > 1) {
 			LASER_INTERVAL = 3000;
@@ -412,9 +415,10 @@ public class GameScreen extends Screen {
 					}
 
 					if(!isboss && inputManager.isKeyDown(KeyEvent.VK_N) && getActivatedType() != 3
-							&& this.drill == null) {
+							&& this.drillCount > 0 && this.drill == null) {
 						this.drill = new Drill(ship.getPositionX() + ship.getWidth() / 2,
 								ship.getPositionY(), DRILL_SPEED);
+						this.drillCount--;
 
 					}
 				}

@@ -730,7 +730,7 @@ public final class DrawManager {
 	public void bombsCount(final Screen screen, final int bombsCount) {
 		backBufferGraphics.setFont(fontRegular);
 		backBufferGraphics.setColor(Color.WHITE);
-		String text = "Remaining Bombs: " + String.format("%01d", bombsCount);
+		String text = "Remaining Bombs_1p: " + String.format("%01d", bombsCount);
 		backBufferGraphics.drawString(text, screen.getWidth() - 340, 60);
 	}
 
@@ -745,7 +745,7 @@ public final class DrawManager {
 	public void bombsCount_2p(final Screen screen, final int bombsCount) {
 		backBufferGraphics.setFont(fontRegular);
 		backBufferGraphics.setColor(Color.WHITE);
-		String text = "Remaining Bombs: " + String.format("%01d", bombsCount);
+		String text = "Remaining Bombs_2p: " + String.format("%01d", bombsCount);
 		backBufferGraphics.drawString(text, screen.getWidth() - 360, 80);
 	}
 
