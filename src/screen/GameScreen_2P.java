@@ -47,6 +47,7 @@ public class GameScreen_2P extends Screen {
     private static final int[] DX = new int[] {1, 0, -1, 0, 1, 1, -1, -1};
     private static final int[] DY = new int[] {0, 1, 0, -1, 1, -1, 1, -1};
     private static final int DRILL_SPEED = -5;
+    private static final int INIT_DRILL_COUNT = 1;
 
 
     /** Current game difficulty settings. */
@@ -144,6 +145,8 @@ public class GameScreen_2P extends Screen {
     /** Player Drill */
     private Drill player1Drill;
     private Drill player2Drill;
+    private int player1DrillCount;
+    private int player2DrillCount;
     private Cooldown player1BombCooldown;
     private Cooldown player2BombCooldown;
     private GameScreen gamescreen;
@@ -196,6 +199,8 @@ public class GameScreen_2P extends Screen {
         timer = new CountUpTimer();
         this.player1BombCount = INIT_BOMB_COUNT;
         this.player2BombCount = INIT_BOMB_COUNT;
+        this.player1DrillCount = INIT_DRILL_COUNT;
+        this.player2DrillCount = INIT_DRILL_COUNT;
         this.BulletsRemaining_1p = gameState.getBulletsRemaining_1p();
         this.BulletsRemaining_2p = gameState.getBulletsRemaining_2p();
 
@@ -349,10 +354,11 @@ public class GameScreen_2P extends Screen {
 
                     }
 
-                    if(!isboss && inputManager.isKeyDown(KeyEvent.VK_R) && this.player1Drill == null) {
+                    if(!isboss && inputManager.isKeyDown(KeyEvent.VK_R)
+                            && this.player1DrillCount > 0 && this.player1Drill == null) {
                         this.player1Drill = new Drill(this.ship_1P.getPositionX() +
                                 this.ship_1P.getWidth() / 2, this.ship_1P.getPositionY(), DRILL_SPEED);
-
+                        this.player1DrillCount--;
                     }
 
                 }
@@ -405,10 +411,11 @@ public class GameScreen_2P extends Screen {
 
                     }
 
-                    if(!isboss && inputManager.isKeyDown(KeyEvent.VK_N) && this.player2Drill == null) {
+                    if(!isboss && inputManager.isKeyDown(KeyEvent.VK_N)
+                            && this.player2DrillCount > 0 && this.player2Drill == null) {
                         this.player2Drill = new Drill(this.ship_2P.getPositionX() +
                                 this.ship_2P.getWidth() / 2, this.ship_2P.getPositionY(), DRILL_SPEED);
-
+                        this.player2DrillCount--;
                     }
                 }
                 if (this.laserActivate) {
