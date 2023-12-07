@@ -1068,4 +1068,8 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	public int getWidth() {
 		return this.width;
 	}
+
+	public List<List<EnemyShip>> getEnemyShips() {
+		return this.enemyShips;
+	}
 }

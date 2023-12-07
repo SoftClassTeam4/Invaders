@@ -5,7 +5,9 @@ import java.util.TimerTask;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.LineUnavailableException;
 import java.util.Timer;
+import engine.BGM;
 
 
 public class SoundEffect {
@@ -20,29 +22,39 @@ public class SoundEffect {
     File stagechangesound = new File("sound/soundEffect/StageChange.wav");
     File initialStartSound = new File("sound/soundEffect/initialStart.wav");
     File startSound = new File("sound/soundEffect/start.wav");
+    File LaserSound = new File("sound/soundEffect/LaserLaunch.wav");
+    File EMPSound = new File("sound/soundEffect/emp2.wav");
+    File BlazeSound = new File("sound/soundEffect/flame.wav");
+    File PoisonSound = new File("sound/soundEffect/poison.wav");
+    File SmogSound = new File("sound/soundEffect/smog.wav");
 
+    private static BGM bgm = new BGM();
 
     /**
      * Play ship's shooting sound
      */
     public void playStageChangeSound() {
         try{
-            Clip clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(stagechangesound));
-            clip.start();
+            if (!bgm.getIsMuted()) {
+                Clip clip = AudioSystem.getClip();
+                clip.open(AudioSystem.getAudioInputStream(stagechangesound));
+                clip.start();
 
-            Thread.sleep(1);
+                Thread.sleep(1);
+            }
         }
         catch(Exception e) { System.err.println("SOUND ERROR: Stage change sound does not played."); }
     }
 
     public void playShipShootingSound() {
         try{
-            Clip clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(shipshootingsound));
-            clip.start();
+            if(!bgm.getIsMuted()) {
+                Clip clip = AudioSystem.getClip();
+                clip.open(AudioSystem.getAudioInputStream(shipshootingsound));
+                clip.start();
 
-            Thread.sleep(1);
+                Thread.sleep(1);
+            }
         }
         catch(Exception e) { System.err.println("SOUND ERROR: Missile shooting sound does not played."); }
     }
@@ -52,11 +64,13 @@ public class SoundEffect {
      */
     public void playShipDestructionSound() {
         try{
-            Clip clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(shipdestructionsound));
-            clip.start();
+            if(!bgm.getIsMuted()) {
+                Clip clip = AudioSystem.getClip();
+                clip.open(AudioSystem.getAudioInputStream(shipdestructionsound));
+                clip.start();
 
-            Thread.sleep(1);
+                Thread.sleep(1);
+            }
         }
         catch(Exception e) { System.err.println("SOUND ERROR: Ship's destroyed sound does not played."); }
     }
@@ -66,11 +80,13 @@ public class SoundEffect {
      */
     public void playShipCollisionSound() {
         try{
+            if(!bgm.getIsMuted()){
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(shipcollisionsound));
             clip.start();
 
             Thread.sleep(1);
+            }
         }
         catch(Exception e) { System.err.println("SOUND ERROR: Ship's attacked sound does not played."); }
     }
@@ -79,11 +95,13 @@ public class SoundEffect {
      */
     public void playEnemyDestructionSound() {
         try{
-            Clip clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(enemydestructionsound));
-            clip.start();
+            if(!bgm.getIsMuted()) {
+                Clip clip = AudioSystem.getClip();
+                clip.open(AudioSystem.getAudioInputStream(enemydestructionsound));
+                clip.start();
 
-            Thread.sleep(1);
+                Thread.sleep(1);
+            }
         }
         catch(Exception e) { System.err.println("SOUND ERROR: Enemy's destroyed sound does not played."); }
     }
@@ -93,35 +111,114 @@ public class SoundEffect {
      */
     public void playEnemyShootingSound() {
         try{
-            Clip clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(enemyshootingsound));
-            clip.start();
+            if(!bgm.getIsMuted()) {
+                Clip clip = AudioSystem.getClip();
+                clip.open(AudioSystem.getAudioInputStream(enemyshootingsound));
+                clip.start();
 
-            Thread.sleep(1);
+                Thread.sleep(1);
+            }
         }
         catch(Exception e) { System.err.println("SOUND ERROR: Enemy's bullet sound does not played."); }
     }
     // sound for button moving sound
     public void playButtonClickSound() {
         try{
-            Clip clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(buttonclicksound));
-            clip.start();
+            if(!bgm.getIsMuted()) {
+                Clip clip = AudioSystem.getClip();
+                clip.open(AudioSystem.getAudioInputStream(buttonclicksound));
+                clip.start();
 
-            Thread.sleep(1);
+                Thread.sleep(1);
+            }
         }
         catch(Exception e) { System.err.println("SOUND ERROR: Button Click sound error."); }
     }
     // sound for spacebar key
     public void playSpaceButtonSound() {
         try {
-            Clip clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(spacebuttonsound));
-            clip.start();
+            if(!bgm.getIsMuted()) {
+                Clip clip = AudioSystem.getClip();
+                clip.open(AudioSystem.getAudioInputStream(spacebuttonsound));
+                clip.start();
 
-            Thread.sleep(1);
+                Thread.sleep(1);
+            }
         } catch (Exception e) {
             System.err.println("SOUND ERROR: Space Key sound error.");
+        }
+    }
+
+    /**
+     * Play Laser sound
+     */
+    public void playLaserSound() {
+        try {
+            if(!bgm.getIsMuted()) {
+                Clip clip = AudioSystem.getClip();
+                clip.open(AudioSystem.getAudioInputStream(LaserSound));
+                clip.start();
+
+                Thread.sleep(1);
+            }
+        } catch (Exception e) {
+            System.err.println("SOUND ERROR: Laser sound error.");
+        }
+    }
+
+    public void playEMPSound() {
+        try {
+            if(!bgm.getIsMuted()) {
+                Clip empclip = AudioSystem.getClip();
+                empclip.open(AudioSystem.getAudioInputStream(EMPSound));
+                empclip.start();
+
+                Thread.sleep(1);
+            }
+        } catch (Exception e) {
+            System.err.println("SOUND ERROR: Laser sound error.");
+        }
+    }
+
+    public void playBlazeSound() {
+        try {
+            if(!bgm.getIsMuted()) {
+                Clip empclip = AudioSystem.getClip();
+                empclip.open(AudioSystem.getAudioInputStream(BlazeSound));
+                empclip.start();
+
+                Thread.sleep(1);
+            }
+        } catch (Exception e) {
+            System.err.println("SOUND ERROR: Laser sound error.");
+        }
+    }
+
+    public void playPoisonSound() {
+        try {
+            if(!bgm.getIsMuted()) {
+                Clip empclip = AudioSystem.getClip();
+                empclip.open(AudioSystem.getAudioInputStream(PoisonSound));
+                empclip.start();
+
+                Thread.sleep(1);
+            }
+        } catch (Exception e) {
+            System.err.println("SOUND ERROR: Laser sound error.");
+        }
+    }
+
+    public void playSmogSound() {
+        try {
+            if(!bgm.getIsMuted()) {
+                Clip empclip = AudioSystem.getClip();
+                empclip.open(AudioSystem.getAudioInputStream(SmogSound));
+                empclip.start();
+
+                Thread.sleep(1);
+            }
+        } catch (Exception e) {
+            System.err.println("SOUND ERROR: Laser sound error.");
         }
     }
     public void SoundEffect_play(){
@@ -139,9 +236,11 @@ public class SoundEffect {
      */
     public void initialStartSound() {
         try {
-            Clip clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(initialStartSound));
-            clip.start();
+            if(!bgm.getIsMuted()) {
+                Clip clip = AudioSystem.getClip();
+                clip.open(AudioSystem.getAudioInputStream(initialStartSound));
+                clip.start();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -154,9 +253,11 @@ public class SoundEffect {
      */
     public void startSound() {
         try {
-            Clip clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(startSound));
-            clip.start();
+            if(!bgm.getIsMuted()) {
+                Clip clip = AudioSystem.getClip();
+                clip.open(AudioSystem.getAudioInputStream(startSound));
+                clip.start();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -180,31 +281,16 @@ public class SoundEffect {
      */
     public void enemyshipspecialDestructionSound(){
         try {
-            String soundFilePath = "sound/soundEffect/enemyshipspecialdestructionsound.wav";
-            File soundFile = new File(soundFilePath).getAbsoluteFile();
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile.getAbsoluteFile());
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.start();
+            if(!bgm.getIsMuted()) {
+                String soundFilePath = "sound/soundEffect/enemyshipspecialdestructionsound.wav";
+                File soundFile = new File(soundFilePath).getAbsoluteFile();
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile.getAbsoluteFile());
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-
-
-//    public void play() {
-//        if (clip != null) {
-//            clip.setFramePosition(0);
-//            clip.start();
-//        }
-//    }
-//
-//    public void stop() {
-//        if (clip != null) {
-//            clip.stop();
-//        }
-//    }
-
-
 }
