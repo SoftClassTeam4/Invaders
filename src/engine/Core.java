@@ -135,7 +135,7 @@ public final class Core {
      *
      * @param args Program args, ignored.
      */
-    public static void main(final String[] args) {
+    public static void (final String[] args) {
         try {
 
             outgame_bgm = new BGM();
